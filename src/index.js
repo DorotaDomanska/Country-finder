@@ -8,6 +8,11 @@ const countryList = document.querySelector("ul.country-list");
 const countryInfo = document.querySelector("div.country-info");
 
 const fetchCountries = (name) => {
+  if (name === "") {
+    countryList.innerHTML = "";
+    countryInfo.innerHTML = "";
+    return;
+  }
   const trimedName = name.trim();
 
   return fetch(
@@ -32,7 +37,7 @@ const fetchCountries = (name) => {
 
 const createCountryCard = ({ name, capital, population, flags, languages }) => {
   const allLanguages = languages.map((language) => language.name).join(", ");
-  const country = document.createElement("p");
+  const country = document.createElement("article");
   country.innerHTML = `
   <h3>
     <img src="${flags.svg}" alt="${name} flag" width="50px" />
@@ -41,6 +46,9 @@ const createCountryCard = ({ name, capital, population, flags, languages }) => {
   <p>Capital: ${capital}</p>
   <p>Population: ${population}</p>
   <p>Languages: ${allLanguages}</p>`;
+
+  countryList.innerHTML = "";
+  countryInfo.innerHTML = "";
   countryInfo.append(country);
 };
 
@@ -53,6 +61,8 @@ const createCountryList = (countries) => {
     return item;
   });
 
+  countryList.innerHTML = "";
+  countryInfo.innerHTML = "";
   countryList.append(...allCountries);
 };
 
