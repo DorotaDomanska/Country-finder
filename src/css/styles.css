@@ -35,3 +35,7 @@ body {
   border: 2px solid rgba(76, 76, 248, 0.779);
   border-radius: 4px;
 }
+
+.country-list {
+  list-style-type: none;
+}
