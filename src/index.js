@@ -20,7 +20,9 @@ const fetchCountries = (name) => {
   )
     .then((response) => {
       if (!response.ok) {
-        throw new Error(response.status);
+        return Notiflix.Notify.failure(
+          `Oops, there is no country with that name`
+        );
       }
       return response.json();
     })
@@ -29,7 +31,11 @@ const fetchCountries = (name) => {
         return Notiflix.Notify.info(
           `Too many matches found. Please enter a more specific name.`
         );
-      if (countries.length === 1) return createCountryCard(countries[0]);
+      if (countries.length === 1) {
+        if (!(`capital` in countries))
+          return createCountryWithNoCapital(countries[0]);
+        return createCountryCard(countries[0]);
+      }
       return createCountryList(countries);
     })
     .catch((error) => console.error(error));
@@ -44,6 +50,23 @@ const createCountryCard = ({ name, capital, population, flags, languages }) => {
     ${name}
   </h3>
   <p>Capital: ${capital}</p>
+  <p>Population: ${population}</p>
+  <p>Languages: ${allLanguages}</p>`;
+
+  countryList.innerHTML = "";
+  countryInfo.innerHTML = "";
+  countryInfo.append(country);
+};
+
+const createCountryWithNoCapital = ({ name, population, flags, languages }) => {
+  const allLanguages = languages.map((language) => language.name).join(", ");
+  const country = document.createElement("article");
+  country.innerHTML = `
+  <h3>
+    <img src="${flags.svg}" alt="${name} flag" width="50px" />
+    ${name}
+  </h3>
+  <p>Capital: - </p>
   <p>Population: ${population}</p>
   <p>Languages: ${allLanguages}</p>`;
 
@@ -68,5 +91,14 @@ const createCountryList = (countries) => {
 
 input.addEventListener(
   "input",
-  debounce((event) => fetchCountries(event.target.value), DEBOUNCE_DELAY)
+  debounce((event) => {
+    if (onlyLettersAndSpacesAndDashes(event.target.value)) {
+      return fetchCountries(event.target.value);
+    }
+    return Notiflix.Notify.info(`Only letters, spaces, and dashes are allowed`);
+  }, DEBOUNCE_DELAY)
 );
+
+function onlyLettersAndSpacesAndDashes(str) {
+  return /^[A-Za-z\s\-]*$/.test(str);
+}
