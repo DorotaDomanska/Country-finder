@@ -8,33 +8,33 @@ const input = document.querySelector("input#search-box");
 const countryList = document.querySelector("ul.country-list");
 const countryInfo = document.querySelector("div.country-info");
 
-const fetchCountries = (name) => {
-  if (name === "") {
-    countryList.innerHTML = "";
-    countryInfo.innerHTML = "";
-    return;
-  }
-  const trimedName = name.trim();
+// const fetchCountries = (name) => {
+//   if (name === "") {
+//     countryList.innerHTML = "";
+//     countryInfo.innerHTML = "";
+//     return;
+//   }
+//   const trimedName = name.trim();
 
-  return (
-    fetch(
-      `https://restcountries.com/v2/name/${trimedName}?fields=name,capital,population,flags,languages`
-    )
-      // if (!response.ok) {
-      //     return Notiflix.Notify.failure(
-      //       `Oops, there is no country with that name`
-      //     )
-      // }
-      .then((countries) => {
-        if (countries.length > 10)
-          return Notiflix.Notify.info(
-            `Too many matches found. Please enter a more specific name.`
-          );
-        if (countries.length === 1) return createCountryCard(countries[0]);
-        return createCountryList(countries);
-      })
-  );
-};
+//   return (
+//     fetch(
+//       `https://restcountries.com/v2/name/${trimedName}?fields=name,capital,population,flags,languages`
+//     )
+//       // if (!response.ok) {
+//       //     return Notiflix.Notify.failure(
+//       //       `Oops, there is no country with that name`
+//       //     )
+//       // }
+//       .then((countries) => {
+//         if (countries.length > 10)
+//           return Notiflix.Notify.info(
+//             `Too many matches found. Please enter a more specific name.`
+//           );
+//         if (countries.length === 1) return createCountryCard(countries[0]);
+//         return createCountryList(countries);
+//       })
+//   );
+// };
 
 const createCountryCard = ({ name, capital, population, flags, languages }) => {
   const allLanguages = languages.map((language) => language.name).join(", ");
