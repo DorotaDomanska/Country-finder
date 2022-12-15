@@ -49,16 +49,18 @@ input.addEventListener(
     }
     if (onlyLettersAndSpacesAndDashes(event.target.value)) {
       fetchCountries(event.target.value).then((data) => {
-        if (!data.ok)
+        if (!data.ok) {
           return Notiflix.Notify.failure(
             `Oops, there is no country with that name`
           );
-        if (data.length > 10)
-          return Notiflix.Notify.info(
-            `Too many matches found. Please enter a more specific name.`
-          );
-        if (data.length === 1) return createCountryCard(data[0]);
-        return createCountryList(data);
+        } else {
+          if (data.length > 10)
+            return Notiflix.Notify.info(
+              `Too many matches found. Please enter a more specific name.`
+            );
+          if (data.length === 1) return createCountryCard(data[0]);
+          return createCountryList(data);
+        }
       });
     } else {
       return Notiflix.Notify.info(
