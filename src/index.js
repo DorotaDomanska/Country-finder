@@ -42,6 +42,11 @@ const createCountryList = (countries) => {
 input.addEventListener(
   "input",
   debounce((event) => {
+    if (event.target.value === "") {
+      countryList.innerHTML = "";
+      countryInfo.innerHTML = "";
+      return;
+    }
     if (onlyLettersAndSpacesAndDashes(event.target.value)) {
       fetchCountries(event.target.value).then((data) => {
         if (!data.ok)
@@ -63,9 +68,3 @@ input.addEventListener(
 function onlyLettersAndSpacesAndDashes(str) {
   return /^[A-Za-z\s\-]*$/.test(str);
 }
-
-// if (name === "") {
-//     countryList.innerHTML = "";
-//     countryInfo.innerHTML = "";
-//     return;
-//   }
