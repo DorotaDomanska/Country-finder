@@ -60,8 +60,11 @@ input.addEventListener(
         if (data.length === 1) return createCountryCard(data[0]);
         return createCountryList(data);
       });
+    } else {
+      return Notiflix.Notify.info(
+        `Only letters, spaces, and dashes are allowed`
+      );
     }
-    return Notiflix.Notify.info(`Only letters, spaces, and dashes are allowed`);
   }, DEBOUNCE_DELAY)
 );
 
