@@ -1,5 +1,7 @@
-const fetchCountries = (name) => {
-  return fetch(`url`)
+export const fetchCountries = (name) => {
+  return fetch(
+    `https://restcountries.com/v2/name/${name.trim()}?fields=name,capital,population,flags,languages`
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.status);
@@ -8,5 +10,3 @@ const fetchCountries = (name) => {
     })
     .catch((error) => console.error(error));
 };
-
-export default fetchCountries;
