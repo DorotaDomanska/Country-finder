@@ -1,21 +1,21 @@
 {
-  "name": "goit-js-hw-10",
+  "name": "Country-finder",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://DorotaDomanska.github.io/goit-js-hw-10",
+  "homepage": "https://DorotaDomanska.github.io/Country-finder",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-hw-10/"
+    "build": "parcel build src/*.html --public-url /Country-finder/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DorotaDomanska/goit-js-hw-10.git"
+    "url": "git+https://github.com/DorotaDomanska/Country-finder.git"
   },
   "keywords": [],
   "author": "Dorota Domańska <dorota@domanska.eu>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DorotaDomanska/goit-js-hw-10/issues"
+    "url": "https://github.com/DorotaDomanska/Country-finder/issues"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",
